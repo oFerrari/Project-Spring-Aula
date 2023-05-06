@@ -20,14 +20,26 @@ public class ProfessorService {
 		return p;
 	}
 	
-	public Professor atualizar(Long id, ProfessorForm dto) {
+	public Professor atualizar(Long id, ProfessorForm form) {
+		
+		Professor entity = buscarPorId(id);
+		ProfessorMapper.INSTANCE.update(form, entity);
+		return entity;
+	}
+	
+	private Professor buscarPorId(Long id) {
 		Optional<Professor> optional = repository.findById(id);
 		if(optional.isEmpty()) {
 			String msg = "Não existe Professor para o codigo [%d] informado";
 			throw new ProfessorNotFoundException(String.format(msg, id));
 		}
-		Professor entity = optional.get();
-		ProfessorMapper.INSTANCE.update(dto, entity);
-		return entity;
+		return optional.get();
+	}
+
+	public void excluir(Long id) {
+		Professor entity = buscarPorId(id);
+		repository.delete(entity);
+		throw new UnsupportedOperationException("Not Supported Yet");
+		
 	}
 }

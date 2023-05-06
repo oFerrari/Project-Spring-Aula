@@ -7,6 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
+import jakarta.validation.Valid;
+
 @Mapper
 public interface ProfessorMapper {
 	public static final ProfessorMapper INSTANCE = Mappers.getMapper(ProfessorMapper.class);
@@ -19,4 +21,7 @@ public interface ProfessorMapper {
 	
 	//@Mapping(target = "id", ignore = true)
     public void update(ProfessorForm dto, @MappingTarget Professor entity);
+
+    //@Mapping(target = "id", ignore = true)
+	public Professor toEntity( ProfessorForm form);
 }
