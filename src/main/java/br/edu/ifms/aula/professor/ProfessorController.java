@@ -1,7 +1,6 @@
 package br.edu.ifms.aula.professor;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -51,7 +49,7 @@ public class ProfessorController {
 	@Transactional
 	public ResponseEntity<?> excluir(@PathVariable Long id){
 		service.excluir(id);
-		return null;
+		return ResponseEntity.ok().build();
 	}
 	
 }
